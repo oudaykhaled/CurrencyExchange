@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivCurrency"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@color/darker_gray" />
+
+        <com.ouday.currencyexchange.core.component.ui.textview.TextViewBold
+            android:id="@+id/tvCurrency"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivCurrency"
+            android:textSize="16sp"
+            tools:text="USD"
+            android:textColor="@color/black"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.ouday.currencyexchange.core.component.ui.textview.TextViewBold
+            android:id="@+id/tvCurrencyDesc"
+            app:layout_constraintTop_toBottomOf="@id/tvCurrency"
+            app:layout_constraintStart_toEndOf="@id/ivCurrency"
+            android:textSize="16sp"
+            tools:text="USD"
+            android:textColor="@color/gray"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.ouday.currencyexchange.core.component.ui.textview.TextViewBold
+            android:id="@+id/tvAmount"
+            android:inputType="numberDecimal"
+            android:textSize="28sp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/black"
+            tools:text="1183.02"
+            android:minWidth="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
