@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ouday.currencyexchange.R
+import com.ouday.currencyexchange.conversion.presentation.ui.fragment.AllRatesFragment
 import com.ouday.currencyexchange.conversion.presentation.ui.fragment.ConverterFragment
 import com.ouday.currencyexchange.conversion.presentation.viewmodel.ConversionViewModel
 import com.ouday.test.core.presentation.ViewModelFactory
@@ -45,7 +46,7 @@ class MainActivity : DaggerAppCompatActivity() {
         FragmentStateAdapter(fragmentActivity) {
         override fun getItemCount() = 2
         override fun createFragment(position: Int): Fragment {
-            return if (position == 0) AllRatesFragment()
+            return if (position == 1) AllRatesFragment()
             else ConverterFragment()
         }
     }

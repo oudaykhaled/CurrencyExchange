@@ -2,4 +2,5 @@
     <string name="app_name">Currency</string>
     <string name="all_rates">All Rates</string>
     <string name="converter">Converter</string>
+    <string name="under_construction">Under Construction</string>
 </resources>
