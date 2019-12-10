@@ -31,6 +31,8 @@ class ConverterFragment : BaseFragment() {
 
     private var adapter = RateRecyclerViewAdapter()
 
+    private var isFirstTimeLoaded = true
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,22 +44,30 @@ class ConverterFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(ConversionViewModel::class.java)
 
-        //        rvCurrency.itemAnimator = SlideInUpAnimator(OvershootInterpolator(1f))
         rvCurrency.adapter = adapter
         rvCurrency.layoutManager = LinearLayoutManager(context)
 
         viewModel?.getConvertionLiveData()?.observe(this@ConverterFragment,androidx.lifecycle.Observer {
             when (it.status) {
-//                Status.LOADING -> showLoading()
+                Status.LOADING -> {
+                    if (isFirstTimeLoaded)showLoading()
+                }
                 Status.ERROR -> {
                     it.message
-//                    dismissLoading()
+                    dismissLoading()
                     onFailedToLoadCurrencies()
                 }
                 Status.SUCCESS -> {
-//                    dismissLoading()
-                    it.data?.let {data ->
-                        onLoadCurrencies(data)
+                        dismissLoading()
+                    if (isFirstTimeLoaded){
+                        it.data?.let {data ->
+                            onLoadCurrencies(data)
+                        }
+                        isFirstTimeLoaded = false
+                    } else{
+                        it.data?.let {data ->
+                            onUpdateCurrencies(data)
+                        }
                     }
                 }
             }
@@ -72,6 +82,10 @@ class ConverterFragment : BaseFragment() {
             }
         })
 
+    }
+
+    private fun onUpdateCurrencies(data: ConversionResponse){
+        adapter.updateCurrencies(data.toExchange())
     }
 
     private fun onLoadCurrencies(data: ConversionResponse) {

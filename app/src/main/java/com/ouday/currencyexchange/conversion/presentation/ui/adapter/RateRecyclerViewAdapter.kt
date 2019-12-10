@@ -1,6 +1,7 @@
 package com.ouday.currencyexchange.conversion.presentation.ui.adapter
 
 import android.os.Handler
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,8 @@ import com.ouday.currencyexchange.R
 import com.ouday.currencyexchange.conversion.data.model.Currency
 import com.ouday.currencyexchange.conversion.domain.CurrencyImageProvider
 import com.ouday.currencyexchange.conversion.domain.ext.convertTo
+import com.ouday.currencyexchange.core.utils.DECIMAL_FORMAT
+import com.ouday.currencyexchange.core.utils.MinMaxDoubleFilter
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.row_currency.view.*
 import kotlinx.android.synthetic.main.row_currency_base.view.*
@@ -20,20 +23,34 @@ import kotlinx.android.synthetic.main.row_currency_base.view.ivCurrency
 import kotlinx.android.synthetic.main.row_currency_base.view.tvCurrency
 import kotlinx.android.synthetic.main.row_currency_base.view.tvCurrencyDesc
 import java.math.BigDecimal
+import java.text.DecimalFormat
 
 class RateRecyclerViewAdapter : RecyclerView.Adapter<RateRecyclerViewAdapter.AbstractViewHolder>() {
 
     private val currencies = ArrayList<Currency>()
     private var baseCurrency: Currency? = null
     private var input: String? = null
+    private val decimalFormat = DecimalFormat(DECIMAL_FORMAT)
+
+    // This map to enhance search speed
+    private var mapCurrencies = HashMap<String, Currency>()
 
     fun setCurrencies(currencies: List<Currency>) {
         this.currencies.clear()
         if (baseCurrency == null){
+            mapCurrencies.clear()
+            for (curr in currencies) mapCurrencies[curr.code] = curr
             baseCurrency = currencies[0]
         }
         this.currencies.addAll(currencies.subList(1, currencies.size))
         notifyDataSetChanged()
+    }
+
+    fun updateCurrencies(currencies: List<Currency>){
+        for (curr in currencies) {
+            mapCurrencies[curr.code]?.rateToBase = curr.rateToBase
+        }
+        notifyItemRangeChanged(1, currencies.size -1)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -100,9 +117,9 @@ class RateRecyclerViewAdapter : RecyclerView.Adapter<RateRecyclerViewAdapter.Abs
 
         override fun bind(currency: Currency?, base: Currency, input: String) {
             super.bind(currency, base, input)
-            itemView.tvAmount.text =
+            itemView.tvAmount.text = decimalFormat.format(
                 currency?.convertTo(safeNum(input), base)
-                    ?.setScale(2, BigDecimal.ROUND_HALF_UP).toString()
+                    ?.setScale(2, BigDecimal.ROUND_HALF_UP)?.toDouble())
 
             itemView.setOnClickListener {
                 baseCurrency = currency
@@ -133,6 +150,12 @@ class RateRecyclerViewAdapter : RecyclerView.Adapter<RateRecyclerViewAdapter.Abs
         }
 
         fun bindEditText(): PrimaryViewHolder {
+            itemView.etInput.filters = arrayOf<InputFilter>(
+                MinMaxDoubleFilter(
+                    1.0F,
+                    1.0E9F
+                )
+            )
             compositeDisposable.add(itemView.etInput.textChanges().subscribe { charSequence ->
                 input =
                     charSequence.toString()

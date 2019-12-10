@@ -1,18 +1,15 @@
 package com.ouday.currencyexchange.conversion.presentation.ui.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ouday.currencyexchange.R
-import com.ouday.currencyexchange.conversion.presentation.ui.fragment.AllRatesFragment
 import com.ouday.currencyexchange.conversion.presentation.ui.fragment.ConverterFragment
 import com.ouday.currencyexchange.conversion.presentation.viewmodel.ConversionViewModel
 import com.ouday.test.core.presentation.ViewModelFactory
-import dagger.android.DaggerActivity
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
