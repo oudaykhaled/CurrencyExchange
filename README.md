@@ -25,6 +25,10 @@ This is project is made in MVVMi patterns and follows the Clean Architecture Boo
     8-  Espresso
     9-  Mochito
 
+# Unit Testing
+
+![alt text](https://github.com/oudaykhaled/CurrencyExchange/blob/master/Unit%20Test.png?raw=true)
+
 # Code Coverage
 
 https://app.codacy.com/manual/oudaykhaled/CurrencyExchange/dashboard
