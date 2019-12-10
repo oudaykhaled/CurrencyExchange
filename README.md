@@ -3,7 +3,7 @@
 Currency Exchanger is a sample application that help its users to easly convert from currency to another one.
 This is project is made in MVVMi patterns and follows the Clean Architecture Book written by Robert Martin.
 
-[![Demo CountPages alpha](https://j.gifs.com/BNXWLN.gif)](https://drive.google.com/file/d/13-Yszv66vS_slKj5ppOv13AHUcs9A-gM/view)
+[![asciicast](https://github.com/oudaykhaled/CurrencyExchange/blob/master/thumb.png?raw=true)](https://drive.google.com/file/d/13-Yszv66vS_slKj5ppOv13AHUcs9A-gM/view)
 
 # Overall Architecture
  
