@@ -151,4 +151,6 @@ dependencies {
 
     implementation libraries.circleimageview
 
+    implementation 'com.github.Shashank02051997:FancyGifDialog-Android:1.2'
+
 }

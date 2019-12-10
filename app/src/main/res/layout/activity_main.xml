@@ -9,9 +9,11 @@ tools:background="#FFFFFF">
 
 <com.google.android.material.tabs.TabLayout
     android:id="@+id/tabs"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:tabMode="scrollable" />
+    android:gravity="center"
+    android:layout_gravity="center"
+    app:tabMode="auto" />
 
 <androidx.viewpager2.widget.ViewPager2
     android:id="@+id/viewPager"

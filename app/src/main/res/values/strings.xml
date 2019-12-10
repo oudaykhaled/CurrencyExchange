@@ -3,4 +3,9 @@
     <string name="all_rates">All Rates</string>
     <string name="converter">Converter</string>
     <string name="under_construction">Under Construction</string>
+    <string name="no_internet">No Internet Connection!</string>
+    <string name="refresh">Please Check your internet connection and click OK button</string>
+    <string name="exit">Exit</string>
+    <string name="ok">OK</string>
+    <string name="offline">You are offline!</string>
 </resources>
