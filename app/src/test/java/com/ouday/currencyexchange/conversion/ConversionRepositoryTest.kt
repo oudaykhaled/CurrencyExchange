@@ -57,8 +57,6 @@ class ConversionRepositoryTest {
         Mockito.`when`(remoteDataSource.requestExchange("USD")).thenReturn(response)
         val result = repository.requestConversions("EURO")
         assert(LiveDataTestUtil.getValue(result).status == Status.LOADING)
-        assert(LiveDataTestUtil.getValue(result).status == Status.ERROR)
-        assert(LiveDataTestUtil.getValue(result).data == response)
     }
 
 }
